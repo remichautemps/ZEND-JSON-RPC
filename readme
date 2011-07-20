@@ -1,0 +1,21 @@
+J'ai monté cette structure Zend pour une raison simple, avoir une petite interface client de test des passerelles JSON que je développe avec des formulaires (Un peu à la manière d'AMF).
+
+Cette structure étant issu d'un projet plus vaste, j'ai supprimé des briques afin d'en extraire uniquement ce que je trouvais intéressant. On y trouve une structure modulaire (obsolète dans ce cas de figure)
+
+Le module wsclient permet d'attaquer un WS Json-RPC en offrant une interface basique.
+
+Donc très bêtement une fois installé : 
+
+1)	http://localhost:8888/ZEND-JSON-RPC/public/wsclient/index/json/
+
+Liste l'ensemble des services SMD décrit par l'interface My_Application_Model_Data que l'on trouve dans /library/My/Controller/Model/Data.php sous forme de format Json.
+
+2)	http://localhost:8888/ZEND-JSON-RPC/public/wsclient/index/json/?method=add
+
+Offre une interface utilisateur pour tester la méthode add
+
+3) Les méthode sont attaquées en ajax grâce aux librairies
+		jquery-1.4.2.min.js
+	    	json2.js
+		jquery.zend.jsonrpc.js
+
