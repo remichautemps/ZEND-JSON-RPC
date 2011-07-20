@@ -1,0 +1,78 @@
+<html>
+	<head>
+	<?php
+	    echo $this->headScript()->appendFile($this->baseUrl('/js/jquery-1.4.2.min.js'))
+	    	->appendFile($this->baseUrl().'/js/json2.js')
+			->appendFile($this->baseUrl().'/js/jquery.zend.jsonrpc.js');
+	?>
+	<script type="text/javascript">
+		$.fn.serializeObject = function()
+		{
+		    var o = {};
+		    var a = this.serializeArray();
+		    $.each(a, function() {
+		        if (o[this.name] !== undefined) {
+		            if (!o[this.name].push) {
+		                o[this.name] = [o[this.name]];
+		            }
+		            o[this.name].push(this.value || '');
+		        } else {
+		            o[this.name] = this.value || '';
+		        }
+		    });
+		    return o;
+		};
+		
+		$(function() {
+		    $('form').submit(function() {
+		    	
+		    	//Conversion maladroite d'un objet json en une forme ["param1", "param2", "param3"]
+		    	var jsonForm = JSON.stringify($('form').serializeObject());
+		    	var obj = jQuery.parseJSON(jsonForm);
+				params = Array();
+				$.each(obj,function(i,val){
+					params.push(val);
+				});
+				
+				var data = null;
+				var client = jQuery.Zend.jsonrpc({
+					url : 'http://localhost:8888/ZEND-JSON-RPC/public/wsserver/index/json/'
+				});
+				//max 6 parametres pour le formulaire (a modifier en fonction)
+				switch(<?php echo $this->nbParam ?>){
+					case 0 :
+						data = client.<?php echo $this->method ?>();
+						break;
+					case 1 :
+						data = client.<?php echo $this->method ?>(params[0]);
+						break;
+					case 2 :
+						data = client.<?php echo $this->method ?>(params[0], params[1]);
+						break;
+					case 3 :
+						data = client.<?php echo $this->method ?>(params[0], params[1], params[2]);
+						break;
+					case 4 :
+						data = client.<?php echo $this->method ?>(params[0], params[1], params[2],params[3]);
+						break;
+					case 5 :
+						data = client.<?php echo $this->method ?>(params[0], params[1], params[2],params[3],params[4]);
+						break;
+					default:
+						break;
+				}
+		        $('#result').text(data);
+		        return false;
+		    });
+		});
+	</script>
+	</head>
+<body>
+	<?php echo $this->links ?>
+	<h3><?php echo $this->method ?></h3>
+	<?php if (isset($this->form)) echo $this->form;
+	?>
+	
+<pre id="result">
+</body>
+</html>
