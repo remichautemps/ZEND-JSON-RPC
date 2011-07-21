@@ -4,7 +4,7 @@ Cette structure etant issu d'un projet plus vaste, j'ai supprime des briques afi
 
 Le module wsclient permet d'attaquer un WS Json-RPC en offrant une interface basique.
 
-Donc tres bêtement une fois installe : 
+Donc très bêtement une fois installe : 
 
 1)	http://localhost:8888/ZEND-JSON-RPC/public/wsclient/index/json/
 
@@ -14,7 +14,7 @@ Liste l'ensemble des services SMD decrit par l'interface My_Application_Model_Da
 
 Offre une interface utilisateur pour tester la methode add
 
-3) Les methode sont attaquees en ajax grâce aux librairies
+3) Les methode sont attaquees en ajax grace aux librairies
 		jquery-1.4.2.min.js
 	    	json2.js
 		jquery.zend.jsonrpc.js
